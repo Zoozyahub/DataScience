@@ -1,18 +1,25 @@
-a = [1, 100] # задать диопозон игре
-print(f"Загдайте число от {a[0]} до {a[1]}, и программа угадает его.")
-while True:
-    print("Ваше чило больше " + str(int((a[0] + a[1])  / 2)) + "?. " + "ответте '1' если да, и '2' если нет")
-    b = input()
-    if a[1] - a[0] <= 2:
-        if b == '1':
-            a[0] = a[1]
-            break          
-    if b == '1': 
-        a[0] = int((a[0] + a[1])  / 2)
-    elif b == '2':
-        a[1] = int((a[0] + a[1])  / 2)
-    else:
-        print('Неккоректный ответ')
-    print(a[0], a[1], sep=' ;')     
-     
-print("ваше число: " + str(a[0]))  
+def game(num):
+    a = [1, 100] # задать диопозон игре
+    count = 1
+    while True:
+        if a[1] - a[0] <= 2:
+            if num > int((a[0] + a[1])  / 2) or (a[0] == a[1] and a[1] == 1):
+                a[0] = a[1]
+                break         
+        if num > int((a[0] + a[1])  / 2): 
+            a[0] = int((a[0] + a[1])  / 2)
+            count += 1
+        elif num <= int((a[0] + a[1])  / 2):
+            a[1] = int((a[0] + a[1])  / 2)
+            count += 1
+    if a[0] == num:  
+        return(count)
+    
+print(game(1))
+
+def test():
+    for j in range(10):
+        for i in range(2, 101):
+            print(game(i))
+        
+test()
